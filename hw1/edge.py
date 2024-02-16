@@ -14,7 +14,7 @@ def main():
     smooth_img = filter2d(img, kernel)
 
     # Compute x and y derivate on smoothed image
-    dx = partial_y(smooth_img)
+    dx = partial_x(smooth_img)
     dy = partial_y(smooth_img)
 
     # Compute gradient magnitude
