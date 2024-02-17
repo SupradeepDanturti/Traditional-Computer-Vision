@@ -21,14 +21,17 @@ def harris_corners(img, window_size=3, k=0.04):
     response = None
     
     ### YOUR CODE HERE
+
     kernel = np.array([[1, 0, -1],
                          [2, 0, -2],
-                         [1, 0, -1]])
+                         [1, 0, -1]]) #Sobel Filter
     Ix = partial_x(img)
     Iy = partial_y(img)
+    #Ref -> https://docs.opencv.org/3.4/dc/d0d/tutorial_py_features_harris.html
     lam_x = Ix * Ix
     lam_y = Iy * Iy
     lam_xy = Ix * Iy
+
     lam_x = filter2d(lam_x, kernel)
     lam_y = filter2d(lam_y, kernel)
     lam_xy = filter2d(lam_xy, kernel)
@@ -51,10 +54,10 @@ def main():
     response = harris_corners(img)
 
     # Threshold on response
-    threshold = 0.5 * response.max()
+    threshold = response.mean() + 2 * response.std()
     corner_threshold = response > threshold
     # Perform non-max suppression by finding peak local maximum
-    coordinates = peak_local_max(response, min_distance=12)
+    coordinates = peak_local_max(response, min_distance=18)
 
     # Visualize results
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(12, 4))
