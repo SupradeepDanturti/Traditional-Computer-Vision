@@ -10,17 +10,16 @@ img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
 
 # run Canny edge detector to find edge points
 edge_detector = cv2.Canny(img, 20, 200)
-# cv2.imshow('edge', edge_detector)
+cv2.imshow('edge', edge_detector)
 
 # create a mask for ROI by calling create_mask
 h, w, c = img.shape
 mask = create_mask(h, w)
-# cv2.imshow('mask', mask)
+cv2.imshow('mask', mask)
 
 # extract edge points in ROI by multipling edge map with the mask
 roi = edge_detector * mask
-# cv2.imshow('mask ROI', roi)
-
+cv2.imshow('mask ROI', roi)
 
 # perform Hough transform
 def hough_line(img):
@@ -103,6 +102,6 @@ plt.plot(xs, ys)
 plt.title("Detected Lanes")
 plt.axis('off')
 plt.show()
-#
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
